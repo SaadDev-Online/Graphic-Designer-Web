@@ -1,689 +1,81 @@
 <!doctype html>
 <html lang="en">
- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Graphic Designer Portfolio</title>
-  <script src="/_sdk/element_sdk.js"></script>
-  <style>
-    body {
-      box-sizing: border-box;
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    html, body {
-      height: 100%;
-      overflow-x: hidden;
-    }
-    
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      line-height: 1.6;
-      color: #1a1a1a;
-    }
-    
-    /* Smooth scroll */
-    html {
-      scroll-behavior: smooth;
-    }
-    
-    /* Navigation */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      padding: 1.5rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
-      transition: all 0.3s ease;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
-    }
-    
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      transition: transform 0.3s ease;
-    }
-    
-    .logo:hover {
-      transform: scale(1.05);
-    }
-    
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-    
-    .nav-links a {
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
-      position: relative;
-      transition: all 0.3s ease;
-    }
-    
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      transition: width 0.3s ease;
-    }
-    
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-    
-    /* Hero Section */
-    .hero {
-      min-height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 6rem 5% 4rem;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .hero-content {
-      max-width: 800px;
-      text-align: center;
-      z-index: 2;
-      animation: fadeInUp 1s ease;
-    }
-    
-    .hero h1 {
-      font-size: 4rem;
-      font-weight: 800;
-      margin-bottom: 1.5rem;
-      line-height: 1.1;
-      letter-spacing: -2px;
-    }
-    
-    .hero p {
-      font-size: 1.3rem;
-      margin-bottom: 2.5rem;
-      opacity: 0.8;
-    }
-    
-    .cta-button {
-      display: inline-block;
-      padding: 1rem 2.5rem;
-      font-size: 1rem;
-      font-weight: 600;
-      text-decoration: none;
-      border-radius: 50px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      border: none;
-      cursor: pointer;
-    }
-    
-    .cta-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    }
-    
-    /* Floating shapes animation */
-    .shape {
-      position: absolute;
-      opacity: 0.1;
-      animation: float 20s infinite ease-in-out;
-    }
-    
-    .shape-1 {
-      top: 10%;
-      left: 10%;
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      animation-delay: 0s;
-    }
-    
-    .shape-2 {
-      top: 60%;
-      right: 15%;
-      width: 60px;
-      height: 60px;
-      border-radius: 10px;
-      animation-delay: 2s;
-    }
-    
-    .shape-3 {
-      bottom: 20%;
-      left: 20%;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      animation-delay: 4s;
-    }
-    
-    /* About Section */
-    .about {
-      padding: 6rem 5%;
-      display: flex;
-      align-items: center;
-      gap: 4rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .about-content {
-      flex: 1;
-      animation: fadeInLeft 1s ease;
-    }
-    
-    .about-content h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-      font-weight: 700;
-    }
-    
-    .about-content p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      opacity: 0.85;
-    }
-    
-    .about-image {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      animation: fadeInRight 1s ease;
-    }
-    
-    .profile-placeholder {
-      width: 350px;
-      height: 350px;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 8rem;
-      transition: transform 0.3s ease;
-    }
-    
-    .profile-placeholder:hover {
-      transform: scale(1.05) rotate(2deg);
-    }
-    
-    /* Services Section */
-    .services {
-      padding: 6rem 5%;
-    }
-    
-    .services h2 {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-      font-weight: 700;
-    }
-    
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .service-card {
-      padding: 2.5rem;
-      border-radius: 20px;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-    
-    .service-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-    }
-    
-    .service-icon {
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
-      display: block;
-    }
-    
-    .service-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      font-weight: 600;
-    }
-    
-    .service-card p {
-      opacity: 0.8;
-      line-height: 1.6;
-    }
-    
-    /* Contact Section */
-    .contact {
-      padding: 6rem 5%;
-      text-align: center;
-    }
-    
-    .contact h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      font-weight: 700;
-    }
-    
-    .contact p {
-      font-size: 1.2rem;
-      margin-bottom: 2.5rem;
-      opacity: 0.8;
-    }
-    
-    .contact-button {
-      display: inline-block;
-      padding: 1rem 2.5rem;
-      font-size: 1rem;
-      font-weight: 600;
-      text-decoration: none;
-      border-radius: 50px;
-      transition: all 0.3s ease;
-      border: 2px solid;
-      cursor: pointer;
-    }
-    
-    .contact-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    }
-    
-    /* Animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    @keyframes fadeInLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-    
-    @keyframes fadeInRight {
-      from {
-        opacity: 0;
-        transform: translateX(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-    
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0) rotate(0deg);
-      }
-      50% {
-        transform: translateY(-20px) rotate(180deg);
-      }
-    }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-      .nav-links {
-        gap: 1.5rem;
-      }
-      
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-      
-      .hero p {
-        font-size: 1.1rem;
-      }
-      
-      .about {
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      .profile-placeholder {
-        width: 250px;
-        height: 250px;
-      }
-      
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-  <style>@view-transition { navigation: auto; }</style>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
- </head>
- <body>
-  <nav>
-   <div class="logo" id="logo">
-    Creative Studio
-   </div>
-   <ul class="nav-links">
-    <li><a href="#home" id="nav-home">Home</a></li>
-    <li><a href="#about" id="nav-about">About</a></li>
-    <li><a href="#services" id="nav-services">Services</a></li>
-    <li><a href="#contact" id="nav-contact">Contact</a></li>
-   </ul>
-  </nav>
-  <section class="hero" id="home">
-   <div class="shape shape-1" id="shape-1"></div>
-   <div class="shape shape-2" id="shape-2"></div>
-   <div class="shape shape-3" id="shape-3"></div>
-   <div class="hero-content">
-    <h1 id="hero-title">Crafting Visual Stories</h1>
-    <p id="hero-subtitle">Transforming ideas into stunning designs that captivate and inspire</p><a href="#contact" class="cta-button" id="cta-button">Let's Work Together</a>
-   </div>
-  </section>
-  <section class="about" id="about">
-   <div class="about-content">
-    <h2 id="about-title">About Me</h2>
-    <p id="about-text">I'm a passionate graphic designer with over 5 years of experience creating memorable brand identities and visual experiences. My work combines creativity with strategic thinking to deliver designs that not only look beautiful but also achieve business goals.</p>
-   </div>
-   <div class="about-image">
-    <div class="profile-placeholder" id="profile-placeholder">
-     🎨
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CreaStudio | Graphic Design, Branding and UI/UX</title>
+<meta name="description" content="CreaStudio is a graphic designer with over 5 years of experience. Get brand identity, UI/UX design and digital marketing graphics that help your business grow.">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:title" content="CreaStudio | Graphic Design, Branding and UI/UX">
+<meta property="og:description" content="CreaStudio is a graphic designer with over 5 years of experience. Get brand identity, UI/UX design and digital marketing graphics that help your business grow.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CreaStudio">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/figtree.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"></div>
+<header class="nav">
+  <a class="logo" href="index.html" aria-label="CreaStudio home"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="18" fill="#4a3df0"/><circle cx="25" cy="31" r="14" fill="#fff"/><rect x="30" y="25" width="23" height="23" rx="7" fill="#ffd9c7"/></svg>CreaStudio</a>
+  <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+  <nav aria-label="Main"><ul class="nav-links" id="menu"><li><a href="index.html" aria-current=page>Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contact.html" class=nav-cta>Contact</a></li></ul></nav>
+</header>
+<main id="main">
+<section class="hero"><i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i>
+<div class="wrap hero-grid"><div>
+<h1><span class="ln"><span class="w" style="--i:0">Crafting</span></span><span class="ln"><span class="w" style="--i:1">Visual</span></span><span class="ln"><span class="w" style="--i:2">Stories</span></span></h1>
+<p class="lead">Transforming ideas into stunning designs that captivate and inspire.</p>
+<div class="btn-row"><a class="btn" href="contact.html">Let's Work Together<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-line" href="portfolio.html">See My Work</a></div></div>
+<svg class="art" viewBox="0 0 640 640" role="img" aria-label="Design artboard with a pen tool curve, color swatches and the letters Aa">
+<defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9e4ff"/><stop offset="1" stop-color="#cfe6ff"/></linearGradient></defs>
+<g class="layer" data-depth="8"><circle class="art-pop" style="--i:0" cx="330" cy="310" r="230" fill="url(#g1)"/></g>
+<g class="layer" data-depth="26"><rect class="art-pop spin" style="--i:1" x="70" y="90" width="150" height="150" rx="38" fill="#ffd9c7"/><path class="art-pop floaty" style="--i:2;--rot:0deg" d="M470 130a72 72 0 0 1 72 72H398a72 72 0 0 1 72-72z" fill="#bff0d8"/><circle class="art-pop floaty" style="--i:3" cx="548" cy="470" r="34" fill="#ffc857"/></g>
+<g class="layer" data-depth="14"><text class="art-pop" style="--i:2" x="330" y="372" text-anchor="middle" font-size="200" font-weight="800" fill="#14173a" letter-spacing="-8">Aa</text></g>
+<g class="layer" data-depth="34">
+<path class="draw" pathLength="1" d="M90 500C190 250 330 600 560 270" fill="none" stroke="#4a3df0" stroke-width="7" stroke-linecap="round"/>
+<g class="art-pop" style="--i:6"><line x1="90" y1="500" x2="190" y2="250" stroke="#14173a" stroke-width="1.5"/><line x1="560" y1="270" x2="330" y2="600" stroke="#14173a" stroke-width="1.5"/>
+<rect x="80" y="490" width="20" height="20" fill="#fff" stroke="#14173a" stroke-width="3"/><rect x="550" y="260" width="20" height="20" fill="#fff" stroke="#14173a" stroke-width="3"/>
+<circle class="pulse" cx="190" cy="250" r="9" fill="#ff6b57"/><circle class="pulse" cx="330" cy="600" r="9" fill="#ff6b57" style="animation-delay:-1.2s"/></g>
+<path class="art-pop" style="--i:8" d="M566 282v44l12-11 11 24 10-5-11-24 16-2z" fill="#14173a"/></g>
+<g class="layer" data-depth="18"><g class="art-pop" style="--i:5"><circle cx="110" cy="585" r="20" fill="#14173a"/><circle cx="158" cy="585" r="20" fill="#4a3df0"/><circle cx="206" cy="585" r="20" fill="#ff6b57"/><circle cx="254" cy="585" r="20" fill="#7df0c7"/></g></g>
+</svg></div></section>
+<div class="marquee" aria-label="Services: Brand Identity, UI/UX Design, Digital Marketing"><div class="marquee-track" aria-hidden="true"><span><span>Brand Identity</span><i></i><span>UI/UX Design</span><i></i><span>Digital Marketing</span><i></i></span><span><span>Brand Identity</span><i></i><span>UI/UX Design</span><i></i><span>Digital Marketing</span><i></i></span><span><span>Brand Identity</span><i></i><span>UI/UX Design</span><i></i><span>Digital Marketing</span><i></i></span><span><span>Brand Identity</span><i></i><span>UI/UX Design</span><i></i><span>Digital Marketing</span><i></i></span></div></div>
+<section class="band"><div class="wrap split">
+<div class="about-img" data-r="wipe"><img src="images/about-art.svg" width="560" height="640" alt="Illustration of an arch, a pen nib and colorful shapes" loading="lazy"><div class="years"><b>5+</b><span>years of design work</span></div></div>
+<div><h2 data-r="up">About Me</h2>
+<p data-r="up" data-d="1" style="margin-top:1.4rem">I'm a passionate graphic designer with over 5 years of experience creating memorable brand identities and visual experiences. My work combines creativity with strategic thinking to deliver designs that not only look beautiful but also achieve business goals.</p>
+<p data-r="up" data-d="2">I like to start with your story. Then I turn it into logos, screens and posts that people remember.</p>
+<a class="tlink" href="about.html" data-r="up" data-d="3">Read more about me<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div></section>
+<section class="band t-paper"><div class="wrap">
+<div class="sec-head"><h2 data-r="up">What I Do</h2><p data-r="up" data-d="1">I help with three things. Each one helps people see your brand, understand it and trust it.</p></div>
+<div class="svc-list"><a class="svc" href="services.html#brand-identity" style="--tint:var(--peach)" data-r="up" data-d="0"><h3>Brand Identity</h3><p>Creating cohesive visual identities that tell your brand's unique story and resonate with your audience.</p><span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="vh">Learn more about Brand Identity</span></a><a class="svc" href="services.html#ui-ux-design" style="--tint:var(--sky)" data-r="up" data-d="1"><h3>UI/UX Design</h3><p>Designing intuitive and beautiful user interfaces that enhance user experience and drive engagement.</p><span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="vh">Learn more about UI/UX Design</span></a><a class="svc" href="services.html#digital-marketing" style="--tint:var(--rose)" data-r="up" data-d="2"><h3>Digital Marketing</h3><p>Crafting eye-catching graphics for social media, ads, and digital campaigns that convert.</p><span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="vh">Learn more about Digital Marketing</span></a></div></div></section>
+<section class="band"><div class="wrap">
+<div class="sec-head"><h2 data-r="up">Design Concepts</h2><p data-r="up" data-d="1">These are sample designs that show my style. I made them to show what I can do. They are not for real clients.</p></div>
+<div class="collage">
+<a class="cc cc-1" href="portfolio.html" data-r="wipe"><img src="images/c1-coffee.svg" width="600" height="750" alt="Concept for a coffee shop brand with a coffee cup and color swatches" loading="lazy"><figcaption>Coffee shop brand concept</figcaption></a>
+<a class="cc cc-2" href="portfolio.html" data-r="wipe" data-d="2"><img src="images/c2-app.svg" width="600" height="450" alt="Concept for a money app with two phone screens" loading="lazy"><figcaption>Money app screens concept</figcaption></a>
+<a class="cc cc-3" href="portfolio.html" data-r="wipe" data-d="4"><img src="images/c3-gym.svg" width="600" height="600" alt="Concept for gym social media posts in four colorful tiles" loading="lazy"><figcaption>Gym social media concept</figcaption></a></div>
+<div class="collage-foot" data-r="up"><p class="lead">Want to see more? The portfolio has six concepts you can open and look at closely.</p><a class="btn" href="portfolio.html">View the Portfolio<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div></section>
+<section class="band t-lilac"><div class="wrap"><h2 data-r="up">How we can work together</h2><div class="steps"><div class="step" data-r="up" data-d="0"><b>1</b><h3>Talk</h3><p>You tell me about your idea, your goals and the people you want to reach.</p></div><div class="step" data-r="up" data-d="1"><b>2</b><h3>Plan</h3><p>We decide together what to make and how we will work.</p></div><div class="step" data-r="up" data-d="2"><b>3</b><h3>Design</h3><p>I make the first designs. You look at them and tell me what you think.</p></div><div class="step" data-r="up" data-d="3"><b>4</b><h3>Finish</h3><p>I make the designs better and give you the final files.</p></div></div></div></section>
+<section class="cta"><i class="sh sh1"></i><i class="sh sh2"></i><i class="sh sh3"></i><i class="sh sh4"></i>
+<div class="wrap"><h2 data-r="up">Let's Create Together</h2><p data-r="up" data-d="1">Ready to bring your vision to life? Get in touch and let's start something amazing.</p><a class="btn" href="contact.html" data-r="up" data-d="2">Get In Touch<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div><a class="logo" href="index.html" aria-label="CreaStudio home"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="18" fill="#4a3df0"/><circle cx="25" cy="31" r="14" fill="#fff"/><rect x="30" y="25" width="23" height="23" rx="7" fill="#ffd9c7"/></svg>CreaStudio</a><p>CreaStudio makes brand identities, app and website screens, and social media graphics. Tell me your idea and let's make it look great.</p></div>
+      <div><h3>Pages</h3><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h3>Say hello</h3><ul><li><a href="mailto:hello@designer.com">hello@designer.com</a></li><li><a href="contact.html">Send a message</a></li></ul></div>
     </div>
-   </div>
-  </section>
-  <section class="services" id="services">
-   <h2 id="services-title">What I Do</h2>
-   <div class="services-grid">
-    <div class="service-card" id="service-1"><span class="service-icon">✨</span>
-     <h3>Brand Identity</h3>
-     <p>Creating cohesive visual identities that tell your brand's unique story and resonate with your audience.</p>
-    </div>
-    <div class="service-card" id="service-2"><span class="service-icon">🎯</span>
-     <h3>UI/UX Design</h3>
-     <p>Designing intuitive and beautiful user interfaces that enhance user experience and drive engagement.</p>
-    </div>
-    <div class="service-card" id="service-3"><span class="service-icon">📱</span>
-     <h3>Digital Marketing</h3>
-     <p>Crafting eye-catching graphics for social media, ads, and digital campaigns that convert.</p>
-    </div>
-   </div>
-  </section>
-  <section class="contact" id="contact">
-   <h2 id="contact-title">Let's Create Together</h2>
-   <p id="contact-subtitle">Ready to bring your vision to life? Get in touch and let's start something amazing.</p><a href="mailto:hello@designer.com" class="contact-button" id="contact-button" target="_blank" rel="noopener noreferrer">Get In Touch</a>
-  </section>
-  <script>
-    const defaultConfig = {
-      background_color: '#f8f9fa',
-      surface_color: '#ffffff',
-      text_color: '#1a1a1a',
-      primary_action_color: '#6366f1',
-      secondary_action_color: '#8b5cf6',
-      font_family: 'Inter',
-      font_size: 16,
-      designer_name: 'Creative Studio',
-      tagline: 'Home',
-      hero_title: 'Crafting Visual Stories',
-      hero_subtitle: 'Transforming ideas into stunning designs that captivate and inspire',
-      cta_button: "Let's Work Together",
-      about_title: 'About Me',
-      about_text: "I'm a passionate graphic designer with over 5 years of experience creating memorable brand identities and visual experiences. My work combines creativity with strategic thinking to deliver designs that not only look beautiful but also achieve business goals.",
-      services_title: 'What I Do',
-      contact_title: "Let's Create Together",
-      contact_subtitle: "Ready to bring your vision to life? Get in touch and let's start something amazing.",
-      contact_button: 'Get In Touch'
-    };
-
-    async function onConfigChange(config) {
-      const customFont = config.font_family || defaultConfig.font_family;
-      const baseFontStack = '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
-      const baseSize = config.font_size || defaultConfig.font_size;
-      
-      const backgroundColor = config.background_color || defaultConfig.background_color;
-      const surfaceColor = config.surface_color || defaultConfig.surface_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      const primaryActionColor = config.primary_action_color || defaultConfig.primary_action_color;
-      const secondaryActionColor = config.secondary_action_color || defaultConfig.secondary_action_color;
-      
-      document.body.style.backgroundColor = backgroundColor;
-      document.body.style.color = textColor;
-      document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
-      
-      const nav = document.querySelector('nav');
-      nav.style.backgroundColor = `${surfaceColor}f2`;
-      
-      const logo = document.getElementById('logo');
-      logo.textContent = config.designer_name || defaultConfig.designer_name;
-      logo.style.color = primaryActionColor;
-      logo.style.fontFamily = `${customFont}, ${baseFontStack}`;
-      logo.style.fontSize = `${baseSize * 1.5}px`;
-      
-      const navLinks = document.querySelectorAll('.nav-links a');
-      navLinks.forEach(link => {
-        link.style.color = textColor;
-        link.style.fontFamily = `${customFont}, ${baseFontStack}`;
-        link.style.fontSize = `${baseSize * 0.95}px`;
-      });
-      
-      navLinks.forEach(link => {
-        link.addEventListener('mouseenter', function() {
-          this.style.color = primaryActionColor;
-        });
-        link.addEventListener('mouseleave', function() {
-          this.style.color = textColor;
-        });
-      });
-      
-      const navLinksAfter = document.querySelectorAll('.nav-links a::after');
-      const style = document.createElement('style');
-      style.textContent = `.nav-links a::after { background-color: ${primaryActionColor}; }`;
-      document.head.appendChild(style);
-      
-      const shapes = document.querySelectorAll('.shape');
-      shapes.forEach(shape => {
-        shape.style.backgroundColor = primaryActionColor;
-      });
-      
-      const heroTitle = document.getElementById('hero-title');
-      heroTitle.textContent = config.hero_title || defaultConfig.hero_title;
-      heroTitle.style.color = textColor;
-      heroTitle.style.fontFamily = `${customFont}, ${baseFontStack}`;
-      heroTitle.style.fontSize = `${baseSize * 4}px`;
-      
-      const heroSubtitle = document.getElementById('hero-subtitle');
-      heroSubtitle.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
-      heroSubtitle.style.color = textColor;
-      heroSubtitle.style.fontFamily = `${customFont}, ${baseFontStack}`;
-      heroSubtitle.style.fontSize = `${baseSize * 1.3}px`;
-      
-      const ctaButton = document.getElementById('cta-button');
-      ctaButton.textContent = config.cta_button || defaultConfig.cta_button;
-      ctaButton.style.backgroundColor = primaryActionColor;
-      ctaButton.style.color = surfaceColor;
-      ctaButton.style.fontFamily = `${customFont}, ${baseFontStack}`;
-      ctaButton.style.fontSize = `${baseSize}px`;
-      
-      ctaButton.addEventListener('mouseenter', function() {
-        this.style.backgroundColor = secondaryActionColor;
-      });
-      ctaButton.addEventListener('mouseleave', function() {
-        this.style.backgroundColor = primaryActionColor;
-      });
-      
-      const aboutTitle = document.getElementById('about-title');
-      aboutTitle.textContent = config.about_title || defaultConfig.about_title;
-      aboutTitle.style.color = textColor;
-      aboutTitle.style.fontFamily = `${customFont}, ${baseFontStack}`;
-      aboutTitle.style.fontSize = `${baseSize * 2.5}px`;
-      
-      const aboutText = document.getElementById('about-text');
-      aboutText.textContent = config.about_text || defaultConfig.about_text;
-      aboutText.style.color = textColor;
-      aboutText.style.fontFamily = `${customFont}, ${baseFontStack}`;
-      aboutText.style.fontSize = `${baseSize * 1.1}px`;
-      
-      const profilePlaceholder = document.getElementById('profile-placeholder');
-      profilePlaceholder.style.backgroundColor = surfaceColor;
-      profilePlaceholder.style.boxShadow = `0 10px 40px ${primaryActionColor}33`;
-      
-      const servicesTitle = document.getElementById('services-title');
-      servicesTitle.textContent = config.services_title || defaultConfig.services_title;
-      servicesTitle.style.color = textColor;
-      servicesTitle.style.fontFamily = `${customFont}, ${baseFontStack}`;
-      servicesTitle.style.fontSize = `${baseSize * 2.5}px`;
-      
-      const serviceCards = document.querySelectorAll('.service-card');
-      serviceCards.forEach(card => {
-        card.style.backgroundColor = surfaceColor;
-        card.style.boxShadow = `0 5px 20px ${primaryActionColor}1a`;
-        
-        const h3 = card.querySelector('h3');
-        h3.style.color = textColor;
-        h3.style.fontFamily = `${customFont}, ${baseFontStack}`;
-        h3.style.fontSize = `${baseSize * 1.5}px`;
-        
-        const p = card.querySelector('p');
-        p.style.color = textColor;
-        p.style.fontFamily = `${customFont}, ${baseFontStack}`;
-        p.style.fontSize = `${baseSize}px`;
-        
-        card.addEventListener('mouseenter', function() {
-          this.style.backgroundColor = primaryActionColor;
-          h3.style.color = surfaceColor;
-          p.style.color = surfaceColor;
-        });
-        card.addEventListener('mouseleave', function() {
-          this.style.backgroundColor = surfaceColor;
-          h3.style.color = textColor;
-          p.style.color = textColor;
-        });
-      });
-      
-      const contactTitle = document.getElementById('contact-title');
-      contactTitle.textContent = config.contact_title || defaultConfig.contact_title;
-      contactTitle.style.color = textColor;
-      contactTitle.style.fontFamily = `${customFont}, ${baseFontStack}`;
-      contactTitle.style.fontSize = `${baseSize * 2.5}px`;
-      
-      const contactSubtitle = document.getElementById('contact-subtitle');
-      contactSubtitle.textContent = config.contact_subtitle || defaultConfig.contact_subtitle;
-      contactSubtitle.style.color = textColor;
-      contactSubtitle.style.fontFamily = `${customFont}, ${baseFontStack}`;
-      contactSubtitle.style.fontSize = `${baseSize * 1.2}px`;
-      
-      const contactButton = document.getElementById('contact-button');
-      contactButton.textContent = config.contact_button || defaultConfig.contact_button;
-      contactButton.style.color = primaryActionColor;
-      contactButton.style.borderColor = primaryActionColor;
-      contactButton.style.fontFamily = `${customFont}, ${baseFontStack}`;
-      contactButton.style.fontSize = `${baseSize}px`;
-      
-      contactButton.addEventListener('mouseenter', function() {
-        this.style.backgroundColor = primaryActionColor;
-        this.style.color = surfaceColor;
-      });
-      contactButton.addEventListener('mouseleave', function() {
-        this.style.backgroundColor = 'transparent';
-        this.style.color = primaryActionColor;
-      });
-    }
-
-    if (window.elementSdk) {
-      window.elementSdk.init({
-        defaultConfig,
-        onConfigChange,
-        mapToCapabilities: (config) => ({
-          recolorables: [
-            {
-              get: () => config.background_color || defaultConfig.background_color,
-              set: (value) => {
-                config.background_color = value;
-                window.elementSdk.setConfig({ background_color: value });
-              }
-            },
-            {
-              get: () => config.surface_color || defaultConfig.surface_color,
-              set: (value) => {
-                config.surface_color = value;
-                window.elementSdk.setConfig({ surface_color: value });
-              }
-            },
-            {
-              get: () => config.text_color || defaultConfig.text_color,
-              set: (value) => {
-                config.text_color = value;
-                window.elementSdk.setConfig({ text_color: value });
-              }
-            },
-            {
-              get: () => config.primary_action_color || defaultConfig.primary_action_color,
-              set: (value) => {
-                config.primary_action_color = value;
-                window.elementSdk.setConfig({ primary_action_color: value });
-              }
-            },
-            {
-              get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
-              set: (value) => {
-                config.secondary_action_color = value;
-                window.elementSdk.setConfig({ secondary_action_color: value });
-              }
-            }
-          ],
-          borderables: [],
-          fontEditable: {
-            get: () => config.font_family || defaultConfig.font_family,
-            set: (value) => {
-              config.font_family = value;
-              window.elementSdk.setConfig({ font_family: value });
-            }
-          },
-          fontSizeable: {
-            get: () => config.font_size || defaultConfig.font_size,
-            set: (value) => {
-              config.font_size = value;
-              window.elementSdk.setConfig({ font_size: value });
-            }
-          }
-        }),
-        mapToEditPanelValues: (config) => new Map([
-          ['designer_name', config.designer_name || defaultConfig.designer_name],
-          ['tagline', config.tagline || defaultConfig.tagline],
-          ['hero_title', config.hero_title || defaultConfig.hero_title],
-          ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
-          ['cta_button', config.cta_button || defaultConfig.cta_button],
-          ['about_title', config.about_title || defaultConfig.about_title],
-          ['about_text', config.about_text || defaultConfig.about_text],
-          ['services_title', config.services_title || defaultConfig.services_title],
-          ['contact_title', config.contact_title || defaultConfig.contact_title],
-          ['contact_subtitle', config.contact_subtitle || defaultConfig.contact_subtitle],
-          ['contact_button', config.contact_button || defaultConfig.contact_button]
-        ])
-      });
-    }
-    
-    onConfigChange(defaultConfig);
-  </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'999d459b36defd3d',t:'MTc2MjM1NTM2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+    <div class="big-word" aria-hidden="true">CreaStudio</div>
+    <div class="copy"><span>&copy; <span id="year">2026</span> CreaStudio. All rights reserved.</span><button class="totop" type="button">Back to top</button></div>
+  </div>
+</footer>
+<button class="fab" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+<script src="js/main.js"></script>
+</body>
 </html>
